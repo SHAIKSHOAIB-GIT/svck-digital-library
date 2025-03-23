@@ -78,9 +78,9 @@ By default, the app will be available at: `http://127.0.0.1:5000/`
 ---
 
 ## Screenshots
-![Home Page](screenshots/home.png)
-![Faculty Login](screenshots/faculty_login.png)
-![Upload Material](screenshots/upload.png)
+![Home Page](static\images\home.png)
+![Faculty Login](static\images\faculty_login.png)
+![Upload Material](static\images\upload.png)
 
 ---
 
