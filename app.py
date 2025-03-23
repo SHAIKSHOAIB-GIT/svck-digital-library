@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session
 from flask_cors import CORS
 import mysql.connector
 import boto3
@@ -213,6 +213,10 @@ def delete_material(material_id):
 
     return jsonify({"message": "Material deleted successfully"}), 200
 
+@app.route('/')
+def home():
+    return render_template('index.html')  # ✅ Ensure the file exists
+app.run(host='0.0.0.0', port=5000, debug=True)
 
 # ---------------------------
 # Run the Flask App
