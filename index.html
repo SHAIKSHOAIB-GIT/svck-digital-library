@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVCK Student Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script_student.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand">SVCK Student Portal</a>
+      <button class="faculty-login-btn" onclick="redirectToFacultyLogin()">Faculty Login</button>
+    </div>
+  </nav>
+  <div class="container">
+    <h2>Search Study Materials</h2>
+    <div class="filters">
+      <select id="filterBranch" onchange="fetchMaterials()">
+        <option value="all">All Branches</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="CSM">CSM</option>
+      </select>
+      <select id="filterSemester" onchange="fetchMaterials()">
+        <option value="all">All Semesters</option>
+        <option value="1">1st Semester</option>
+        <option value="2">2nd Semester</option>
+        <option value="3">3rd Semester</option>
+        <option value="4">4th Semester</option>
+      </select>
+      <input type="text" id="filterSubject" placeholder="Enter Subject" onkeyup="fetchMaterials()" />
+    </div>
+    <table id="materialsTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Branch</th>
+          <th>Semester</th>
+          <th>Subject</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Materials will be loaded here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>All Rights Reserved to No One</p>
+  </footer>
+</body>
+</html>
