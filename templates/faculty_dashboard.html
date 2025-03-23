@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Faculty Dashboard - SVCK Portal</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script src="{{ url_for('static', filename='js/script_faculty.js') }}"></script>
 </head>
 <body>
   <!-- Faculty Login Form -->
@@ -23,7 +23,7 @@
   <div id="facultyDashboard" class="dashboard-container" style="display: none;">
     <nav class="navbar">
       <div class="nav-container">
-        <a href="index.html" class="brand">Student Portal</a>
+        <a href="/" class="brand">Student Portal</a>
         <div class="nav-right">
           <span id="facultyUsernameDisplay"></span>
           <button id="logoutBtn" class="logout-btn" onclick="logout()">Logout</button>
@@ -64,6 +64,14 @@
       </section>
 
       <!-- Filters -->
+      <label>Branch:</label>
+      <select id="branchFilter">
+        <option value="all">All</option>
+        <option value="cse">CSE</option>
+        <option value="ece">ECE</option>
+        <option value="csm">CSM</option>
+      </select>
+
       <label>Semester:</label>
       <select id="semesterFilter">
         <option value="all">All</option>
@@ -79,7 +87,7 @@
 
       <label>Subject:</label>
       <input type="text" id="subjectFilter" placeholder="Enter subject">
-      <button onclick="fetchFacultyMaterials()">Search</button>
+      <button onclick="fetchMaterials()">Search</button>
 
       <!-- Materials Table -->
       <section id="facultyMaterialsSection">

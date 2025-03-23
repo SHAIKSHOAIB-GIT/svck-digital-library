@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   
    // If on the dashboard page, check session and attach dashboard events
-   if (window.location.pathname.includes("faculty_dashboard.html")) {
+   if (window.location.pathname.includes("/faculty_dashboard")) {
     checkSession();
     fetchFacultyMaterials();
 
@@ -97,7 +97,7 @@ if (uploadForm) {
             .then(data => {
                 alert(data.message);
                 localStorage.removeItem("faculty");
-                window.location.href = "index.html"; // Redirect to login page
+                window.location.href = "/"; // Redirect to login page
             })
             .catch(error => console.error("Logout error:", error));
         });
@@ -138,22 +138,28 @@ function fetchFacultyMaterials() {
         .catch(error => console.error("Error fetching materials:", error));
 } 
 
-// Fetch materials with filters (semester & subject)
-function fetchFilteredMaterials() {
-const semester = document.getElementById("semesterFilter").value;
-const subject = document.getElementById("subjectFilter").value.trim().toLowerCase();
-let url = "http://127.0.0.1:5000/materials?";
-if (semester && semester !== "all") {
-    url += `semester=${semester}&`;
-}
-if (subject) {
-    url += `subject=${encodeURIComponent(subject)}`;
-}
-fetch(url, { method: "GET", credentials: "include" })
-    .then(response => response.json())
-    .then(data => {
+// Fetch materials with filters (branch, semester & subject)
+async function fetchFilteredMaterials() {
+    const branch = document.getElementById("filterBranch").value;
+    const semester = document.getElementById("semesterFilter").value;
+    const subject = document.getElementById("subjectFilter").value.trim().toLowerCase();
+
+    // Construct URL parameters
+    const params = new URLSearchParams();
+    if (branch && branch !== "all") params.append("branch", branch);
+    if (semester && semester !== "all") params.append("semester", semester);
+    if (subject) params.append("subject", subject);
+
+    const url = `http://127.0.0.1:5000/materials?${params.toString()}`;
+
+    try {
+        const res = await fetch(url, { method: "GET", credentials: "include" });
+        if (!res.ok) throw new Error("Failed to fetch filtered materials");
+
+        const data = await res.json();
         const tableBody = document.querySelector("#facultyMaterialsTable tbody");
         tableBody.innerHTML = "";
+
         if (data.length === 0) {
             tableBody.innerHTML = `<tr><td colspan="4">No materials found</td></tr>`;
         } else {
@@ -171,9 +177,18 @@ fetch(url, { method: "GET", credentials: "include" })
                 tableBody.appendChild(row);
             });
         }
-    })
-    .catch(error => console.error("Error fetching filtered materials:", error));
+    } catch (error) {
+        console.error("Error fetching filtered materials:", error);
+    }
 }
+
+// Attach event listener to filter button
+document.addEventListener("DOMContentLoaded", () => {
+    const filterBtn = document.getElementById("filterBtn");
+    if (filterBtn) {
+        filterBtn.addEventListener("click", fetchFilteredMaterials);
+    }
+});
 
 // Download file function
 function downloadFile(fileUrl) {
@@ -219,4 +234,50 @@ fetch("http://127.0.0.1:5000/check_session", { credentials: "include" })
         }
     })
     .catch(error => console.error("Session check failed:", error));
+}
+
+async function fetchMaterials() {
+    const branch = document.getElementById("branchFilter").value; // Get branch
+    const semester = document.getElementById("semesterFilter").value;
+    const subject = document.getElementById("subjectFilter").value.trim().toLowerCase();
+
+    // Construct URL with filters
+    const params = new URLSearchParams();
+    if (branch && branch !== "all") params.append("branch", branch);
+    if (semester && semester !== "all") params.append("semester", semester);
+    if (subject) params.append("subject", subject);
+
+    const url = `http://127.0.0.1:5000/materials?${params.toString()}`;
+    console.log("Fetching URL:", url);  // Debugging
+
+    try {
+        const res = await fetch(url, { method: "GET", credentials: "include" });
+        if (!res.ok) throw new Error("Failed to fetch filtered materials");
+
+        const data = await res.json();
+        console.log("Filtered Data:", data); // Debugging
+
+        const tableBody = document.querySelector("#facultyMaterialsTable tbody");
+        tableBody.innerHTML = "";
+
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="4">No materials found</td></tr>`;
+        } else {
+            data.forEach(material => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${material.title}</td>
+                    <td>${material.semester}</td>
+                    <td>${material.subject}</td>
+                    <td>
+                        <button onclick="downloadFile('${material.file_url}')">View</button>
+                        <button onclick="deleteMaterial(${material.id})">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching filtered materials:", error);
+    }
 }

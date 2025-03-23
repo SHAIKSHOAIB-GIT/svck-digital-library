@@ -45,6 +45,10 @@ def get_db_connection():
 # ---------------------------
 # Faculty Authentication
 # ---------------------------
+@app.route('/faculty_dashboard')
+def faculty_dashboard():
+    return render_template("faculty_dashboard.html")  # ✅ This will correctly serve the page
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -216,10 +220,10 @@ def delete_material(material_id):
 @app.route('/')
 def home():
     return render_template('index.html')  # ✅ Ensure the file exists
-app.run(host='0.0.0.0', port=5000, debug=True)
+
 
 # ---------------------------
 # Run the Flask App
 # ---------------------------
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

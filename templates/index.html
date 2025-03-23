@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SVCK Student Portal</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script src="{{ url_for('static', filename='js/script_student.js') }}"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -29,6 +29,10 @@
         <option value="2">2nd Semester</option>
         <option value="3">3rd Semester</option>
         <option value="4">4th Semester</option>
+        <option value="5">5th Semester</option>
+        <option value="6">6th Semester</option>
+        <option value="7">7th Semester</option>
+        <option value="8">8th Semester</option>
       </select>
       <input type="text" id="filterSubject" placeholder="Enter Subject" onkeyup="fetchMaterials()" />
     </div>
