@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Dashboard - SVCK Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script_faculty.js" defer></script>
+</head>
+<body>
+  <!-- Faculty Login Form -->
+  <div id="facultyLoginContainer" class="form-container">
+    <h2>Faculty Login</h2>
+    <form id="facultyLoginForm">
+      <input type="text" id="facultyUsername" placeholder="Username (e.g., cse)" required>
+      <input type="password" id="facultyPassword" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p id="facultyLoginError" class="error" style="display: none;">Invalid credentials. Try again.</p>
+    </form>
+  </div>
+
+  <!-- Faculty Dashboard (hidden initially) -->
+  <div id="facultyDashboard" class="dashboard-container" style="display: none;">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand">Student Portal</a>
+        <div class="nav-right">
+          <span id="facultyUsernameDisplay"></span>
+          <button id="logoutBtn" class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container">
+      <h2>Manage Study Materials</h2>
+      
+      <!-- Upload Section -->
+      <section id="uploadSection" class="upload-section">
+        <h3>Upload Material</h3>
+        <form id="uploadForm" enctype="multipart/form-data">
+          <input type="file" id="uploadFile" required>
+          <input type="text" id="uploadTitle" placeholder="Title" required>
+          <select id="uploadSemester" required>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+          <input type="text" id="uploadSubject" placeholder="Subject" required>
+          <!-- Branch dropdown -->
+          <label for="uploadBranch"></label>
+          <select id="uploadBranch" required>
+            <option value="all">All Departments</option>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="csm">CSM</option>
+          </select>
+          <button type="submit">Upload</button>
+        </form>
+      </section>
+
+      <!-- Filters -->
+      <label>Semester:</label>
+      <select id="semesterFilter">
+        <option value="all">All</option>
+        <option value="1">1st</option>
+        <option value="2">2nd</option>
+        <option value="3">3rd</option>
+        <option value="4">4th</option>
+        <option value="5">5th</option>
+        <option value="6">6th</option>
+        <option value="7">7th</option>
+        <option value="8">8th</option>
+      </select>
+
+      <label>Subject:</label>
+      <input type="text" id="subjectFilter" placeholder="Enter subject">
+      <button onclick="fetchFacultyMaterials()">Search</button>
+
+      <!-- Materials Table -->
+      <section id="facultyMaterialsSection">
+        <h3>Your Materials</h3>
+        <table id="facultyMaterialsTable">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Semester</th>
+              <th>Subject</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Materials will be loaded here -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

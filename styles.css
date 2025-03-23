@@ -1,0 +1,168 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+  }
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-size: 1.5em;
+    text-decoration: none;
+    color: #fff;
+  }
+  .faculty-login-btn,
+  .logout-btn {
+    background-color: #ff6f61;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  /* Containers */
+  .container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* Filters */
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .filters select,
+  .filters input {
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  table th,
+  table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  table th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  .view-btn {
+    background-color: #5bc0de;
+    color: #fff;
+  }
+  .download-btn {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+  .delete-btn {
+    background-color: #d9534f;
+    color: #fff;
+  }
+  
+  /* Form Container (Login) */
+  .form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .form-container button {
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .error {
+    color: red;
+    display: none;
+  }
+  
+  /* Dashboard & Upload Section */
+  .dashboard-container {
+    display: none;
+  }
+  /* Upload Section - Arrange inputs in multiple lines */
+.upload-section form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Add space between fields */
+  justify-content: space-between; /* Distribute fields */
+}
+
+/* Reduce input field size & arrange them in 2-3 lines */
+.upload-section form input,
+.upload-section form select {
+  width: 48%; /* Two fields per row */
+  margin: 5px 0;
+  padding: 6px;
+  font-size: 0.9em;
+}
+
+/* Make sure the file input takes full width */
+.upload-section form input[type="file"] {
+  width: 100%;
+}
+
+/* Ensure button is below input fields */
+.upload-section form button {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 0.9em;
+}
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  position: fixed; /* Keeps it at the bottom */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 1rem;
+}
