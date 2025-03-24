@@ -8,14 +8,21 @@ from werkzeug.utils import secure_filename
 from datetime import timedelta
 import os
 import config  # Import AWS & DB credentials from config.py
+from flask_session import Session
 
 # Initialize Flask App
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.secret_key = "your_secret_key"
 app.permanent_session_lifetime = timedelta(days=1)
 
 # Allow CORS for frontend (5500)
-CORS(app, supports_credentials=True, origins=["http://127.0.0.1:5500"])
+CORS(app, supports_credentials=True, origins="*", allow_headers=["Content-Type", "Authorization"])
+
+# ✅ Store sessions in the filesystem to persist across IPs
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_COOKIE_SECURE"] = False  # ✅ Set True if using HTTPS
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 
 # AWS S3 Configuration
 AWS_ACCESS_KEY = config.AWS_ACCESS_KEY

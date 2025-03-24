@@ -12,7 +12,7 @@
   <div id="facultyLoginContainer" class="form-container">
     <h2>Faculty Login</h2>
     <form id="facultyLoginForm">
-      <input type="text" id="facultyUsername" placeholder="Username (e.g., cse)" required>
+      <input type="text" id="facultyUsername" placeholder="Username" required>
       <input type="password" id="facultyPassword" placeholder="Password" required>
       <button type="submit">Login</button>
       <p id="facultyLoginError" class="error" style="display: none;">Invalid credentials. Try again.</p>
@@ -87,7 +87,7 @@
 
       <label>Subject:</label>
       <input type="text" id="subjectFilter" placeholder="Enter subject">
-      <button onclick="fetchMaterials()">Search</button>
+      <button onclick="fetchFilteredMaterials()">Search</button>
 
       <!-- Materials Table -->
       <section id="facultyMaterialsSection">
